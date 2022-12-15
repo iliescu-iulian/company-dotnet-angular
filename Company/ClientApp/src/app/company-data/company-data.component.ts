@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { CompanyDataService } from "../company-data.service";
 import { CompanyDataFields } from "../company-data-fields";
 
@@ -9,8 +10,10 @@ import { CompanyDataFields } from "../company-data-fields";
 })
 export class CompanyDataComponent implements OnInit {
 
-  private companyData$: Observable<ICompanyData[]>;
-  private fieldHeaders: string[];
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
+  companyData$: Observable<ICompanyData[]>;
+  fieldHeaders: string[];
 
   get sortField(): string {
     return this.companyDataService.sortFieldDisplayName;
@@ -18,7 +21,11 @@ export class CompanyDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.fieldHeaders = Array.from(Object.values(CompanyDataFields));
-    this.companyData$ = this.companyDataService.getAll();
+    this.companyData$ = this.companyDataService.getAll().pipe(
+      catchError(err => {
+        this.errorMessageSubject.next(err);
+        return EMPTY;
+      }));
   }
 
   onSort(sortField: CompanyDataFields): void {
