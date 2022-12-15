@@ -1,0 +1,25 @@
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="companyData$ | async as data">
+  <thead>
+  <tr>
+    <ng-container  *ngFor="let header of fieldHeaders">
+      <th><a (click)="onSort(header)">{{header}}</a></th>
+    </ng-container>
+    <!--
+    <th>Company Name</th>
+    <th><a></a>Years in business</th>
+    <th>Contact Name</th>
+    <th>Contact Email</th>
+    <th>Contact Phone</th>
+    -->
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.companyName }}</td>
+      <td>{{ item.yearsInBusiness }}</td>
+      <td>{{ item.contactName }}</td>
+      <td>{{ item.contactEmail }}</td>
+      <td>{{ item.contactPhone }}</td>
+    </tr>
+  </tbody>
+</table>
