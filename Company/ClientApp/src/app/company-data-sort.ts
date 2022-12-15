@@ -1,17 +1,9 @@
-import { Observable, Subscription, throwError, BehaviorSubject, combineLatest, EMPTY, Subject } from 'rxjs';
 import { CompanyDataFields } from "./company-data-fields";
 
 export class CompanyDataSort {
   fieldMapper: Map<string, string>;
   private sortField: string;
-  /*private sortBySubject = new BehaviorSubject<string>('');
-  sortByAction$ = this.sortBySubject.asObservable();
-  sortedCompanyData$ = combineLatest([this.companyData$, this.sortByAction$])
-    .pipe(
-      map(([companyData, sortField]) =>
-        ))
-        */
-  //constructor(private companyData$: Observable<ICompanyData[]>) { }
+
   constructor(sortFieldDisplayName: string) {
     this.fieldMapper = new Map<string, string>();
     Object.keys(CompanyDataFields).forEach(key =>

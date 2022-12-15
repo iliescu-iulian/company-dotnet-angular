@@ -66,15 +66,6 @@ export class CompanyDataService {
     });
   }
 
-  /*addBookTo(parent: IBook, child: IBook): Observable<IBook> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.post<IBook>(this.apiUrl + `books/${parent.id}/items`, child, { headers })
-      .pipe(
-        tap(data => console.log(`addBookTo ${parent.id}: ` + JSON.stringify(data))),
-        catchError(this.handleError)
-      );
-  }*/
-
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
