@@ -28,7 +28,7 @@ const CompanyData = () => {
 
     useEffect(() => {
         if (dataList.length > 0) {
-            const ordered = dataList.sort((lhs, rhs) => compareData(lhs, rhs, sortField, sortAscending));
+            const ordered = [...dataList].sort((lhs, rhs) => compareData(lhs, rhs, sortField, sortAscending));
             setDataList(ordered);
         }
     }, [sortAscending, sortField]);
@@ -39,12 +39,17 @@ const CompanyData = () => {
 
     return (
         <div>
-        <h1 id="tabelLabel">Company data</h1>
-            <div>
-                <h6>Sort:</h6>
-                <h5>{sortAscending ? "ASCENDING" : "DESCENDING"}</h5>
-                <button type="button" class="btn btn-secondary" onClick={() => { setSortAscending(!sortAscending) }}>Toggle</button>
+            <h1 id="tabelLabel">Company data</h1>
+            <div class="row">
+                <label class="column col-md-1">
+                    Sort:
+                </label>
+                <select onChange={(e) => setSortAscending(e.target.value === "Asc")} class="column col-md-2">
+                    <option value="Asc">Ascending</option>
+                    <option value="Desc">Descending</option>
+                </select>
             </div>
+           
         <table className='table table-striped' aria-labelledby="tabelLabel">
           <thead>
             <tr>
