@@ -1,8 +1,9 @@
-﻿using System;
-using Company.DataSource;
+﻿using Company.DataSource;
+using Company.DataSource.Core;
 using Company.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Company.Controllers
 {
@@ -10,18 +11,18 @@ namespace Company.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        private readonly IDataReader _dataReader;
+        private readonly IDataSource<CompanyData> _dataSource;
 
-        public CompanyController(IDataReader dataReader)
+        public CompanyController(IDataSource<CompanyData> dataSource)
         {
-            _dataReader = dataReader;
+            _dataSource = dataSource;
         }
         [HttpGet]
         public IActionResult GetAll()
         {
             try
             {
-                var data = _dataReader.ReadAll();
+                var data = _dataSource.Data;
                 return Ok(CompanyDataDto.Map(data));
             }
             catch (Exception e)

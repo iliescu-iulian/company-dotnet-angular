@@ -17,13 +17,21 @@ export class CompanyDataComponent implements OnInit {
 
   get sortField(): string {
     return this.companyDataService.sortFieldDisplayName;
-}
+  }
+
+  extractErrorMessage(err) {
+    if (err.status == 500) {
+      return `Internal Server Error [${err.error}]`;
+    }
+    return err.message;
+  }
 
   ngOnInit(): void {
     this.fieldHeaders = Array.from(Object.values(CompanyDataFields));
     this.companyData$ = this.companyDataService.getAll().pipe(
       catchError(err => {
-        this.errorMessageSubject.next(err);
+        err.status 
+        this.errorMessageSubject.next(this.extractErrorMessage(err));
         return EMPTY;
       }));
   }

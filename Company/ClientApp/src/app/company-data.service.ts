@@ -57,13 +57,16 @@ export class CompanyDataService {
   }
 
   downloadAsCsv(): void {
-    this.sortedCompanyData$.subscribe((data) => {
+    const sub = this.sortedCompanyData$.subscribe((data) => {
       const blob: Blob = new Blob([this.toCsv(data)],
         {
           type: "text/csv;charset=utf-8"
         });
       saveAs(blob, "companyData.csv");
     });
+    setTimeout(() => {
+      sub.unsubscribe();
+    }, 1000);
   }
 
   private handleError(err: HttpErrorResponse) {

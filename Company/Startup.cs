@@ -1,4 +1,5 @@
 using Company.DataSource;
+using Company.DataSource.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -26,7 +27,7 @@ namespace Company
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            services.AddSingleton<IDataReader, DataReader>();
+            services.AddSingleton<IDataSource<CompanyData>, InMemoryResources>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

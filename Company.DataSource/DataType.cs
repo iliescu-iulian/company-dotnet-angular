@@ -2,8 +2,7 @@
 {
     public enum DataType
     {
-        Comma,
-        Hash,
-        Hyphen
+        Csv,
+        Json
     }
 }

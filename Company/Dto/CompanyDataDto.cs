@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using Company.DataSource;
+﻿using Company.DataSource.Core;
+using System.Collections.Generic;
 
 namespace Company.Dto
 {
     public class CompanyDataDto
     {
         public CompanyDataDto()
-        {}
+        { }
 
         public CompanyDataDto(CompanyData source)
         {

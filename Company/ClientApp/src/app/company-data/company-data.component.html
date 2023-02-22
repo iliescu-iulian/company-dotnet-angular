@@ -1,7 +1,9 @@
-<div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+<div class="alert alert-danger fade show" *ngIf="errorMessage$ | async as errorMessage">
   {{errorMessage}}
- </div>
-
+  <button class="close" (click)="clearError()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="companyData$ | async as data">
   <thead>
     <tr>
